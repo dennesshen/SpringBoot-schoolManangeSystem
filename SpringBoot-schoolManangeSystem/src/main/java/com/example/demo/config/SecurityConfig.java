@@ -6,9 +6,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
@@ -17,18 +19,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// 登入的相關路徑設定
 		http.formLogin()
 			.loginProcessingUrl("/perform_login")
 			.loginPage("/aboutLogin/loginPage")
-			.successForwardUrl("/view/")
+			.successForwardUrl("/")
 			.failureForwardUrl("/view/test");
 	
-		
+		//登入認證及授權設定
 		http.authorizeHttpRequests()
-			.antMatchers("/violation/**", "/record/**", "/classAndGrade/**" ).authenticated()
-			.anyRequest().permitAll();
-//			.and()
-//			.csrf().disable();
+			.antMatchers("/", "/view/**", "/aboutLogin/loginPage").permitAll()
+			.antMatchers("/violation/", "/record/", "/classAndGrade/").hasRole("manager")
+			.anyRequest().authenticated();
+		
+		//登出勝定
+		http.logout()
+		.deleteCookies("JSESSIONID")
+		.logoutSuccessUrl("/")
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 		
 			
 	}

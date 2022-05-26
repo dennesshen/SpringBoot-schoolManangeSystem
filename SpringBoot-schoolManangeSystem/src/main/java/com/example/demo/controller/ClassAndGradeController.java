@@ -46,4 +46,10 @@ public class ClassAndGradeController {
 		return "classAndGrade.html";
 	}
 	
+	@RequestMapping("/delete/{gid}")
+	public String delete(@PathVariable("gid") Long id) {
+		classAndGradeRepository.deleteById(id);
+		return "redirect:/record/";
+	}
+	
 }

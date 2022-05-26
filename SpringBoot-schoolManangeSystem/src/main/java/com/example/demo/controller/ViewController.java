@@ -1,24 +1,19 @@
 package com.example.demo.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.entity.Record;
 import com.example.demo.repository.ClassAndGradeRepository;
 import com.example.demo.repository.RecordRepository;
 import com.example.demo.service.ViewSearchService;
 
 @Controller
-@RequestMapping("/view")
+@RequestMapping(value = {"/view", "/"})
 public class ViewController {
 	
 	@Autowired 
