@@ -1,0 +1,14 @@
+<header xmlns:th="http://www.thymeleaf.org">
+<div style="text-align: center;"> 
+	<a th:href="@{/view/}" class="btn btn-info"> 違規紀錄查詢 </a>
+	<a sec:authorize="hasRole('manager')" th:href="@{/record/}" class="btn btn-info"> 違規紀錄維護 </a>
+	<a sec:authorize="hasRole('manager')" th:href="@{/violation/}" class="btn btn-info"> 違規樣態維護 </a>
+	<a sec:authorize="hasRole('manager')" th:href="@{/classAndGrade/}" class="btn btn-info"> 班級維護 </a>
+	<a sec:authorize="hasAuthority('admin')" href="#" class="btn btn-info"> 使用權限管理 </a>
+	<a th:href="@{/aboutLogin/loginPage}"  class="btn btn-info"> 管理員登入 </a>
+	<a th:href="@{/logout}" class="btn btn-info">登出</a>
+	<p />
+	
+</div>
+
+</header>
