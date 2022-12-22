@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "userEntity")
+@Table(name = "user")
 public class UserLogin {
 	
 	@Transient
